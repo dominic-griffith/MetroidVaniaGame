@@ -7,9 +7,9 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader Instance;
 
 
-    //Singleton Design Pattern
     public void Awake()
     {
+        //Singleton Design Pattern
         if (Instance == null)
         {
 
@@ -19,6 +19,7 @@ public class SceneLoader : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+            return;
         }
     }
 
