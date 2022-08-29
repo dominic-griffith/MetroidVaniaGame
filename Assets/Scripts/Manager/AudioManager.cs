@@ -5,6 +5,9 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+
+    public AudioMixerGroup musicMixerGroup;
+    public AudioMixerGroup SFXMixerGroup;
     public Sound[] sounds;
 
     private void Awake()
@@ -22,7 +25,7 @@ public class AudioManager : MonoBehaviour
         }
 
 
-
+        //Assign atributes to the sound
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -31,6 +34,16 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+
+            switch(s.audioType)
+            {
+                case (Sound.AudioTypes.SFX):
+                    s.source.outputAudioMixerGroup = SFXMixerGroup;
+                    break;
+                case (Sound.AudioTypes.music):
+                    s.source.outputAudioMixerGroup = musicMixerGroup;
+                    break;
+            }
         }
     }
 
@@ -44,8 +57,9 @@ public class AudioManager : MonoBehaviour
         return Instance;
     }
 
-    //Play Audio Clip
-    //use: AudioManager.GetInstance().Play("name");
+
+    //Play/Stop Audio Clip
+    //ex use: AudioManager.GetInstance().Play("name");
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -56,5 +70,17 @@ public class AudioManager : MonoBehaviour
         }
             
         s.source.Play();
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found.");
+            return;
+        }
+
+        s.source.Stop();
     }
 }

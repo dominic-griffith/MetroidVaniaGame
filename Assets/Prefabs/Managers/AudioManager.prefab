@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e30f6c2a24c54a8cb03e6c9088b03ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicMixerGroup: {fileID: 6181559356022121003, guid: 5e579146c921b41eaa3bfe93fa2fb358, type: 2}
+  SFXMixerGroup: {fileID: 875210004285655625, guid: 5e579146c921b41eaa3bfe93fa2fb358, type: 2}
   sounds: []
