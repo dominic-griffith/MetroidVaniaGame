@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealthUI : MonoBehaviour
 {
-    public int currentHealth;
-    public int maxHealth;
-
     public Image[] healthUI;
 
     private void Update()
@@ -19,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     {
         for(int i = 0; i < healthUI.Length; i++)
         {
-            if (i < currentHealth)
+            if (i < PlayerState.GetInstance().currentHealth)
                 healthUI[i].enabled = true;
             else
                 healthUI[i].enabled = false;

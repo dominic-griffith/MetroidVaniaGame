@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class PlayerHealthSystem : MonoBehaviour
 {
-    public int maxHealth = 3;
-    public int currentHealth;
-
-    private void Start()
-    {
-        currentHealth = maxHealth; //change once saving system is done
-    }
-
     public void TakeDamage(int dmg)
     {
-        currentHealth -= dmg;
+        PlayerState.GetInstance().currentHealth -= dmg;
 
-        if(currentHealth <= 0)
+        if(PlayerState.GetInstance().currentHealth <= 0)
         {
             //Kill Player
         }
@@ -25,10 +17,9 @@ public class PlayerHealthSystem : MonoBehaviour
 
     public void Heal(int health)
     {
-        currentHealth += health;
-
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        if (PlayerState.GetInstance().currentHealth + health > PlayerState.GetInstance().maxHealth)
+            PlayerState.GetInstance().currentHealth = PlayerState.GetInstance().maxHealth;
+        else
+            PlayerState.GetInstance().currentHealth += health;
     }
-
 }

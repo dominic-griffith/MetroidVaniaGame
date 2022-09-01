@@ -6,7 +6,10 @@ public class PlayerState : MonoBehaviour
 {
     public static PlayerState Instance;
 
-    public void Awake()
+    public int currentHealth;
+    public int maxHealth = 3;
+
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -18,6 +21,11 @@ public class PlayerState : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        currentHealth = maxHealth; //change once saving system is done
     }
 
     public static PlayerState GetInstance()
