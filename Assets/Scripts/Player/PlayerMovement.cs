@@ -6,10 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     //public Animator animator;
-    public float runSpeed = 40f;
+    public float walkSpeed = 40f;
+    public float runSpeed = 80f;
 
     private float horizontalMove = 0f;
     private bool jump = false;
+    private bool isRunning = false;
 
 
     private void Update()
@@ -24,14 +26,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetInput()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if(isRunning)
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        else
+            horizontalMove = Input.GetAxisRaw("Horizontal") * walkSpeed;
 
         //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             jump = true;
             //animator.SetBool("Jump", true);
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            isRunning = true;
+        }
+        else
+        {
+            isRunning = false;
         }
     }
 
